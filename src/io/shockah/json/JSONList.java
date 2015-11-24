@@ -37,6 +37,11 @@ public class JSONList<T> extends ArrayList<T> {
 		addAll(list);
 	}
 	
+	@Override
+	public String toString() {
+		return new JSONPrettyPrinter().toString(this);
+	}
+	
 	public boolean isNull(int index) {
 		return get(index) == null;
 	}

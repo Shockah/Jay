@@ -53,6 +53,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		putAll(map);
 	}
 	
+	@Override
+	public String toString() {
+		return new JSONPrettyPrinter().toString(this);
+	}
+	
 	public boolean isNull(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
