@@ -56,8 +56,6 @@ public class JSONList<T> extends ArrayList<T> {
 		Object o = get(index);
 		if (o instanceof Integer)
 			return (Integer)o;
-		if (o instanceof Boolean)
-			return (Boolean)o ? 1 : 0;
 		throw new ClassCastException();
 	}
 	
@@ -67,8 +65,6 @@ public class JSONList<T> extends ArrayList<T> {
 			return (Long)o;
 		if (o instanceof Integer)
 			return (Integer)o;
-		if (o instanceof Boolean)
-			return (Boolean)o ? 1 : 0;
 		throw new ClassCastException();
 	}
 	
@@ -80,8 +76,6 @@ public class JSONList<T> extends ArrayList<T> {
 			return (Long)o;
 		if (o instanceof Integer)
 			return (Integer)o;
-		if (o instanceof Boolean)
-			return (Boolean)o ? 1 : 0;
 		throw new ClassCastException();
 	}
 	

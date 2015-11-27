@@ -85,8 +85,6 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		Object o = get(key);
 		if (o instanceof Integer)
 			return (Integer)o;
-		if (o instanceof Boolean)
-			return (Boolean)o ? 1 : 0;
 		throw new ClassCastException();
 	}
 	
@@ -102,8 +100,6 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			return (Long)o;
 		if (o instanceof Integer)
 			return (Integer)o;
-		if (o instanceof Boolean)
-			return (Boolean)o ? 1 : 0;
 		throw new ClassCastException();
 	}
 	
@@ -121,8 +117,6 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			return (Long)o;
 		if (o instanceof Integer)
 			return (Integer)o;
-		if (o instanceof Boolean)
-			return (Boolean)o ? 1 : 0;
 		throw new ClassCastException();
 	}
 	
