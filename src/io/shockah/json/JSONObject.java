@@ -24,7 +24,9 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	@SuppressWarnings("unchecked")
 	protected static Object prepareObject(Object o) {
-		if (o instanceof Boolean || o instanceof Integer || o instanceof Long || o instanceof Double
+		if (o == null)
+			return null;
+		else if (o instanceof Boolean || o instanceof Integer || o instanceof Long || o instanceof Double
 			|| o instanceof String || o instanceof JSONObject || o instanceof JSONList<?>)
 			return o;
 		else if (o instanceof Map<?, ?>)
@@ -217,18 +219,9 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return comments.get(key);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object put(String key, Object value) {
-		if (value instanceof Boolean || value instanceof Integer || value instanceof Long || value instanceof Double
-			|| value instanceof String || value instanceof JSONObject || value instanceof JSONList<?>)
-			return super.put(key, value);
-		else if (value instanceof Map<?, ?>)
-			return super.put(key, new JSONObject((Map<String, Object>)value));
-		else if (value instanceof List<?>)
-			return super.put(key, new JSONList<Object>((List<Object>)value));
-		else
-			throw new ClassCastException();
+		return super.put(key, prepareObject(value));
 	}
 	
 	@Override

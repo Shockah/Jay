@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public class JSONList<T> extends ArrayList<T> {
 	private static final long serialVersionUID = 1574253633071750087L;
@@ -166,29 +165,13 @@ public class JSONList<T> extends ArrayList<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(T e) {
-		if (e instanceof Boolean || e instanceof Integer || e instanceof Long || e instanceof Double
-			|| e instanceof String || e instanceof JSONObject || e instanceof JSONList<?>)
-			return super.add(e);
-		else if (e instanceof Map<?, ?>)
-			return super.add((T)new JSONObject((Map<String, Object>)e));
-		else if (e instanceof List<?>)
-			return super.add((T)new JSONList<Object>((List<Object>)e));
-		else
-			throw new ClassCastException();
+		return super.add((T)prepareObject(e));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(int index, T element) {
-		if (element instanceof Boolean || element instanceof Integer || element instanceof Long || element instanceof Double
-			|| element instanceof String || element instanceof JSONObject || element instanceof JSONList<?>)
-			super.add(index, element);
-		else if (element instanceof Map<?, ?>)
-			super.add(index, (T)new JSONObject((Map<String, Object>)element));
-		else if (element instanceof List<?>)
-			super.add(index, (T)new JSONList<Object>((List<Object>)element));
-		else
-			throw new ClassCastException();
+		super.add(index, (T)prepareObject(element));
 	}
 	
 	@Override
