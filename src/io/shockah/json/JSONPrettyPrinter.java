@@ -60,24 +60,14 @@ public class JSONPrettyPrinter extends JSONPrinter {
 			i++;
 		}
 		
-		boolean first = true;
-		for (Map.Entry<String, Object> entry : j.entrySet()) {
-			if (first)
-				first = false;
-			else
-				sb.append(',');
-			sb.append('\n');
-			
-			insertIndent(sb, indentLevel + 1);
-			sb.append(toString(entry.getKey()));
-			sb.append(": ");
-			sb.append(toString(entry.getValue(), indentLevel + 1));
-		}
-		
 		sb.append('\n');
 		insertIndent(sb, indentLevel);
 		sb.append('}');
 		return sb.toString();
+	}
+	
+	public String toString(JSONList<?> j) {
+		return toString(j, 0);
 	}
 	
 	protected String toString(JSONList<?> j, int indentLevel) {
@@ -117,6 +107,8 @@ public class JSONPrettyPrinter extends JSONPrinter {
 						if (i % addCompactNewlineEvery == 0) {
 							sb.append('\n');
 							insertIndent(sb, indentLevel + 1);
+						} else {
+							sb.append(' ');
 						}
 					}
 					sb.append(toString(o, indentLevel + 1));
