@@ -79,6 +79,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) ? getBool(key) : def;
 	}
 	
+	public Boolean getOptionalBool(String key) {
+		return containsKey(key) && !isNull(key) ? getBool(key) : null;
+	}
+	
 	public int getInt(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
@@ -90,6 +94,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public int getInt(String key, int def) {
 		return containsKey(key) ? getInt(key) : def;
+	}
+	
+	public Integer getOptionalInt(String key) {
+		return containsKey(key) && !isNull(key) ? getInt(key) : null;
 	}
 	
 	public long getLong(String key) {
@@ -105,6 +113,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public long getLong(String key, long def) {
 		return containsKey(key) ? getLong(key) : def;
+	}
+	
+	public Long getOptionalLong(String key) {
+		return containsKey(key) && !isNull(key) ? getLong(key) : null;
 	}
 	
 	public double getDouble(String key) {
@@ -124,6 +136,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) ? getDouble(key) : def;
 	}
 	
+	public Double getOptionalDouble(String key) {
+		return containsKey(key) && !isNull(key) ? getDouble(key) : null;
+	}
+	
 	public String getString(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
@@ -135,6 +151,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public String getString(String key, String def) {
 		return containsKey(key) ? getString(key) : def;
+	}
+	
+	public String getOptionalString(String key) {
+		return containsKey(key) && !isNull(key) ? getString(key) : null;
 	}
 	
 	public JSONObject getObject(String key) {
@@ -154,6 +174,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) ? getObject(key) : new JSONObject();
 	}
 	
+	public JSONObject getOptionalObject(String key) {
+		return containsKey(key) && !isNull(key) ? getObject(key) : null;
+	}
+	
 	public JSONList<?> getList(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
@@ -169,6 +193,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public JSONList<?> getListOrEmpty(String key) {
 		return containsKey(key) ? getList(key) : new JSONList<Object>();
+	}
+	
+	public JSONList<?> getOptionalList(String key) {
+		return containsKey(key) && !isNull(key) ? getList(key) : null;
 	}
 	
 	public boolean putDefault(String key, Object value) {

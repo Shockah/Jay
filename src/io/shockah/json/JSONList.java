@@ -52,11 +52,19 @@ public class JSONList<T> extends ArrayList<T> {
 		throw new ClassCastException();
 	}
 	
+	public Boolean getOptionalBool(int index) {
+		return isNull(index) ? null : getBool(index);
+	}
+	
 	public int getInt(int index) {
 		Object o = get(index);
 		if (o instanceof Integer)
 			return (Integer)o;
 		throw new ClassCastException();
+	}
+	
+	public Integer getOptionalInteger(int index) {
+		return isNull(index) ? null : getInt(index);
 	}
 	
 	public long getLong(int index) {
@@ -66,6 +74,10 @@ public class JSONList<T> extends ArrayList<T> {
 		if (o instanceof Integer)
 			return (Integer)o;
 		throw new ClassCastException();
+	}
+	
+	public Long getOptionalLong(int index) {
+		return isNull(index) ? null : getLong(index);
 	}
 	
 	public double getDouble(int index) {
@@ -79,11 +91,19 @@ public class JSONList<T> extends ArrayList<T> {
 		throw new ClassCastException();
 	}
 	
+	public Double getOptionalDouble(int index) {
+		return isNull(index) ? null : getDouble(index);
+	}
+	
 	public String getString(int index) {
 		Object o = get(index);
 		if (o instanceof String)
 			return (String)o;
 		throw new ClassCastException();
+	}
+	
+	public String getOptionalString(int index) {
+		return isNull(index) ? null : getString(index);
 	}
 	
 	public JSONObject getObject(int index) {
@@ -93,11 +113,19 @@ public class JSONList<T> extends ArrayList<T> {
 		throw new ClassCastException();
 	}
 	
+	public JSONObject getOptionalObject(int index) {
+		return isNull(index) ? null : getObject(index);
+	}
+	
 	public JSONList<?> getList(int index) {
 		Object o = get(index);
 		if (o instanceof JSONList<?>)
 			return (JSONList<?>)o;
 		throw new ClassCastException();
+	}
+	
+	public JSONList<?> getOptionalList(int index) {
+		return isNull(index) ? null : getList(index);
 	}
 	
 	public JSONList<Boolean> ofBooleans() {
