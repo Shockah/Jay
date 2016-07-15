@@ -174,6 +174,16 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) ? getObject(key) : new JSONObject();
 	}
 	
+	public JSONObject getObjectOrNew(String key) {
+		if (containsKey(key)) {
+			return getObject(key);
+		} else {
+			JSONObject j = new JSONObject();
+			put(key, j);
+			return j;
+		}
+	}
+	
 	public JSONObject getOptionalObject(String key) {
 		return containsKey(key) && !isNull(key) ? getObject(key) : null;
 	}
@@ -193,6 +203,16 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public JSONList<?> getListOrEmpty(String key) {
 		return containsKey(key) ? getList(key) : new JSONList<Object>();
+	}
+	
+	public JSONList<?> getListOrNew(String key) {
+		if (containsKey(key)) {
+			return getList(key);
+		} else {
+			JSONList<?> j = new JSONList<>();
+			put(key, j);
+			return j;
+		}
 	}
 	
 	public JSONList<?> getOptionalList(String key) {
