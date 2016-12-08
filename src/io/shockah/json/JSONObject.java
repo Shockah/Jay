@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import io.shockah.util.func.Action1;
 
 public class JSONObject extends LinkedHashMap<String, Object> {
 	private static final long serialVersionUID = -8548703026353148866L;
@@ -83,6 +84,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getBool(key) : null;
 	}
 	
+	public void onBool(String key, Action1<Boolean> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getBool(key));
+	}
+	
 	public int getInt(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
@@ -98,6 +104,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public Integer getOptionalInt(String key) {
 		return containsKey(key) && !isNull(key) ? getInt(key) : null;
+	}
+	
+	public void onInt(String key, Action1<Integer> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getInt(key));
 	}
 	
 	public long getLong(String key) {
@@ -117,6 +128,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public Long getOptionalLong(String key) {
 		return containsKey(key) && !isNull(key) ? getLong(key) : null;
+	}
+	
+	public void onLong(String key, Action1<Long> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getLong(key));
 	}
 	
 	public double getDouble(String key) {
@@ -140,6 +156,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getDouble(key) : null;
 	}
 	
+	public void onDouble(String key, Action1<Double> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getDouble(key));
+	}
+	
 	public String getString(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
@@ -155,6 +176,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public String getOptionalString(String key) {
 		return containsKey(key) && !isNull(key) ? getString(key) : null;
+	}
+	
+	public void onString(String key, Action1<String> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getString(key));
 	}
 	
 	public JSONObject getObject(String key) {
@@ -188,6 +214,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getObject(key) : null;
 	}
 	
+	public void onObject(String key, Action1<JSONObject> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getObject(key));
+	}
+	
 	public JSONList<?> getList(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
@@ -217,6 +248,11 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	
 	public JSONList<?> getOptionalList(String key) {
 		return containsKey(key) && !isNull(key) ? getList(key) : null;
+	}
+	
+	public void onList(String key, Action1<JSONList<?>> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getList(key));
 	}
 	
 	public boolean putDefault(String key, Object value) {
