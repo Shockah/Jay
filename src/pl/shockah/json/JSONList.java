@@ -149,6 +149,13 @@ public class JSONList<T> extends ArrayList<T> {
 		return j;
 	}
 	
+	public JSONList<Double> ofDoubles() {
+		JSONList<Double> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getDouble(i));
+		return j;
+	}
+	
 	public JSONList<String> ofStrings() {
 		JSONList<String> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
