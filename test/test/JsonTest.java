@@ -1,11 +1,11 @@
 package test;
 
-import io.shockah.json.JSONObject;
-import io.shockah.json.JSONParser;
-import io.shockah.json.JSONPrettyPrinter;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import pl.shockah.json.JSONObject;
+import pl.shockah.json.JSONParser;
+import pl.shockah.json.JSONPrettyPrinter;
 
 public class JsonTest {
 	public static void main(String[] args) {

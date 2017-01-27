@@ -1,4 +1,4 @@
-package io.shockah.json;
+package pl.shockah.json;
 
 public enum JSONSpecialToken {
 	ObjectBegin,

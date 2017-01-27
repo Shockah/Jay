@@ -1,11 +1,11 @@
-package io.shockah.json;
+package pl.shockah.json;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import io.shockah.util.func.Action1;
+import pl.shockah.util.func.Action1;
 
 public class JSONObject extends LinkedHashMap<String, Object> {
 	private static final long serialVersionUID = -8548703026353148866L;

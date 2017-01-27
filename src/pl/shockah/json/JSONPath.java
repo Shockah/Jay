@@ -1,7 +1,7 @@
-package io.shockah.json;
+package pl.shockah.json;
 
 import java.util.Arrays;
-import io.shockah.util.func.Action1;
+import pl.shockah.util.func.Action1;
 
 public class JSONPath {
 	public final JSONObject json;
