@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	jcenter()
+	maven {
+		url 'https://jitpack.io'
+	}
+}
+
+dependencies {
+	compile 'com.github.Shockah:pl.shockah.util:master-SNAPSHOT'
+}

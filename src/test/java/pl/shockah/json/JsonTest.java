@@ -1,4 +1,4 @@
-package test;
+package pl.shockah.json;
 
 import java.io.File;
 import java.nio.charset.Charset;
