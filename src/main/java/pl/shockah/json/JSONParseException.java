@@ -6,9 +6,11 @@ public class JSONParseException extends RuntimeException {
 	public JSONParseException() {
 		super();
 	}
+	
 	public JSONParseException(String message) {
 		super(message);
 	}
+	
 	public JSONParseException(Throwable throwable) {
 		super(throwable);
 	}

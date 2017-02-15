@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import pl.shockah.util.func.Action1;
 
@@ -55,6 +57,49 @@ public class JSONPath {
 			json.onBool(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onBool(Arrays.copyOfRange(path, 1, path.length), f);
+	}
+	
+	public BigInteger getBigInt(String path) {
+		return getBigInt(splitPath(path));
+	}
+	
+	public BigInteger getBigInt(String path, BigInteger def) {
+		return getBigInt(splitPath(path), def);
+	}
+	
+	public BigInteger getOptionalBigInt(String path) {
+		return getOptionalBigInt(splitPath(path));
+	}
+	
+	public void onBigInt(String path, Action1<BigInteger> f) {
+		onBigInt(splitPath(path), f);
+	}
+	
+	protected BigInteger getBigInt(String[] path) {
+		if (path.length == 1)
+			return json.getBigInt(path[0]);
+		return new JSONPath(json.getObject(path[0])).getBigInt(Arrays.copyOfRange(path, 1, path.length));
+	}
+	
+	protected BigInteger getBigInt(String[] path, BigInteger def) {
+		if (path.length == 1)
+			return json.getBigInt(path[0], def);
+		if (!json.containsKey(path[0]))
+			return def;
+		return new JSONPath(json.getObject(path[0])).getBigInt(Arrays.copyOfRange(path, 1, path.length), def);
+	}
+	
+	protected BigInteger getOptionalBigInt(String[] path) {
+		if (path.length == 1)
+			return json.getOptionalBigInt(path[0]);
+		return new JSONPath(json.getObject(path[0])).getOptionalBigInt(Arrays.copyOfRange(path, 1, path.length));
+	}
+	
+	protected void onBigInt(String[] path, Action1<BigInteger> f) {
+		if (path.length == 1)
+			json.onBigInt(path[0], f);
+		else
+			new JSONPath(json.getObject(path[0])).onBigInt(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 	
 	public int getInt(String path) {
@@ -141,6 +186,92 @@ public class JSONPath {
 			json.onLong(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onLong(Arrays.copyOfRange(path, 1, path.length), f);
+	}
+	
+	public BigDecimal getBigDecimal(String path) {
+		return getBigDecimal(splitPath(path));
+	}
+	
+	public BigDecimal getBigDecimal(String path, BigDecimal def) {
+		return getBigDecimal(splitPath(path), def);
+	}
+	
+	public BigDecimal getOptionalBigDecimal(String path) {
+		return getOptionalBigDecimal(splitPath(path));
+	}
+	
+	public void onBigDecimal(String path, Action1<BigDecimal> f) {
+		onBigDecimal(splitPath(path), f);
+	}
+	
+	protected BigDecimal getBigDecimal(String[] path) {
+		if (path.length == 1)
+			return json.getBigDecimal(path[0]);
+		return new JSONPath(json.getObject(path[0])).getBigDecimal(Arrays.copyOfRange(path, 1, path.length));
+	}
+	
+	protected BigDecimal getBigDecimal(String[] path, BigDecimal def) {
+		if (path.length == 1)
+			return json.getBigDecimal(path[0], def);
+		if (!json.containsKey(path[0]))
+			return def;
+		return new JSONPath(json.getObject(path[0])).getBigDecimal(Arrays.copyOfRange(path, 1, path.length), def);
+	}
+	
+	protected BigDecimal getOptionalBigDecimal(String[] path) {
+		if (path.length == 1)
+			return json.getOptionalBigDecimal(path[0]);
+		return new JSONPath(json.getObject(path[0])).getOptionalBigDecimal(Arrays.copyOfRange(path, 1, path.length));
+	}
+	
+	protected void onBigDecimal(String[] path, Action1<BigDecimal> f) {
+		if (path.length == 1)
+			json.onBigDecimal(path[0], f);
+		else
+			new JSONPath(json.getObject(path[0])).onBigDecimal(Arrays.copyOfRange(path, 1, path.length), f);
+	}
+	
+	public float getFloat(String path) {
+		return getFloat(splitPath(path));
+	}
+	
+	public float getFloat(String path, float def) {
+		return getFloat(splitPath(path), def);
+	}
+	
+	public Float getOptionalFloat(String path) {
+		return getOptionalFloat(splitPath(path));
+	}
+	
+	public void onFloat(String path, Action1<Float> f) {
+		onFloat(splitPath(path), f);
+	}
+	
+	protected float getFloat(String[] path) {
+		if (path.length == 1)
+			return json.getFloat(path[0]);
+		return new JSONPath(json.getObject(path[0])).getFloat(Arrays.copyOfRange(path, 1, path.length));
+	}
+	
+	protected float getFloat(String[] path, float def) {
+		if (path.length == 1)
+			return json.getFloat(path[0], def);
+		if (!json.containsKey(path[0]))
+			return def;
+		return new JSONPath(json.getObject(path[0])).getFloat(Arrays.copyOfRange(path, 1, path.length), def);
+	}
+	
+	protected Float getOptionalFloat(String[] path) {
+		if (path.length == 1)
+			return json.getOptionalFloat(path[0]);
+		return new JSONPath(json.getObject(path[0])).getOptionalFloat(Arrays.copyOfRange(path, 1, path.length));
+	}
+	
+	protected void onFloat(String[] path, Action1<Float> f) {
+		if (path.length == 1)
+			json.onFloat(path[0], f);
+		else
+			new JSONPath(json.getObject(path[0])).onFloat(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 	
 	public double getDouble(String path) {

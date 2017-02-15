@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,16 +42,12 @@ public class JSONTokenizer {
 						tokens.add(false);
 					} else {
 						try {
-							tokens.add(Integer.parseInt(literal));
+							tokens.add(new BigInteger(literal));
 						} catch (NumberFormatException e1) {
 							try {
-								tokens.add(Long.parseLong(literal));
+								tokens.add(new BigDecimal(literal));
 							} catch (NumberFormatException e2) {
-								try {
-									tokens.add(Double.parseDouble(literal));
-								} catch (NumberFormatException e3) {
-									throw new JSONParseException(String.format("Invalid literal '%s' at position %d", literal, openingPosition));
-								}
+								throw new JSONParseException(String.format("Invalid literal '%s' at position %d", literal, openingPosition));
 							}
 						}
 					}

@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 public class JSONParser {
@@ -8,12 +10,10 @@ public class JSONParser {
 			return "null";
 		else if (token instanceof Boolean)
 			return ((Boolean)token) ? "true" : "false";
-		else if (token instanceof Integer)
-			return Integer.toString((Integer)token);
-		else if (token instanceof Long)
-			return Long.toString((Long)token);
-		else if (token instanceof Double)
-			return Double.toString((Double)token);
+		else if (token instanceof BigInteger)
+			return ((BigInteger)token).toString();
+		else if (token instanceof BigDecimal)
+			return ((BigDecimal)token).toString();
 		else if (token instanceof String)
 			return String.format("'%s'", token);
 		else if (token instanceof JSONSpecialToken)

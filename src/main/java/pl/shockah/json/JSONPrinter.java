@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 
 public class JSONPrinter {
@@ -55,12 +57,10 @@ public class JSONPrinter {
 			return toString((String)o);
 		else if (o instanceof Boolean)
 			return (Boolean)o ? "true" : "false";
-		else if (o instanceof Integer)
-			return Integer.toString((Integer)o);
-		else if (o instanceof Long)
-			return Long.toString((Long)o);
-		else if (o instanceof Double)
-			return Double.toString((Double)o);
+		else if (o instanceof BigInteger)
+			return ((BigInteger)o).toString();
+		else if (o instanceof BigDecimal)
+			return ((BigDecimal)o).toString();
 		else if (o instanceof JSONObject)
 			return toString((JSONObject)o);
 		else if (o instanceof JSONList<?>)

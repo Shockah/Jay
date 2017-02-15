@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,9 +10,16 @@ import java.util.List;
 public class JSONList<T> extends ArrayList<T> {
 	private static final long serialVersionUID = 1574253633071750087L;
 	
+	protected final Class<T> clazz;
+	
 	@SafeVarargs
 	public static <T> JSONList<T> of(T... values) {
-		JSONList<T> j = new JSONList<>();
+		return of(null, values);
+	}
+	
+	@SafeVarargs
+	public static <T> JSONList<T> of(Class<T> clazz, T... values) {
+		JSONList<T> j = new JSONList<>(clazz);
 		j.addAll(Arrays.asList(values));
 		return j;
 	}
@@ -28,17 +37,43 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 	
 	public JSONList() {
-		super();
+		this((Class<T>)null);
 	}
 	
 	public JSONList(List<T> list) {
+		this(null, list);
+	}
+	
+	public JSONList(Class<T> clazz) {
 		super();
+		this.clazz = clazz;
+	}
+	
+	public JSONList(Class<T> clazz, List<T> list) {
+		super();
+		this.clazz = clazz;
 		addAll(list);
 	}
 	
 	@Override
 	public String toString() {
 		return new JSONPrettyPrinter().toString(this);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public T get(int index) {
+		if (clazz != null) {
+			if (clazz == Integer.class)
+				return (T)(Integer)getInt(index);
+			else if (clazz == Long.class)
+				return (T)(Long)getLong(index);
+			else if (clazz == Float.class)
+				return (T)(Float)getFloat(index);
+			else if (clazz == Double.class)
+				return (T)(Double)getDouble(index);
+		}
+		return super.get(index);
 	}
 	
 	public boolean isNull(int index) {
@@ -56,39 +91,54 @@ public class JSONList<T> extends ArrayList<T> {
 		return isNull(index) ? null : getBool(index);
 	}
 	
-	public int getInt(int index) {
+	public BigInteger getBigInt(int index) {
 		Object o = get(index);
-		if (o instanceof Integer)
-			return (Integer)o;
+		if (o instanceof BigInteger)
+			return (BigInteger)o;
 		throw new ClassCastException();
 	}
 	
-	public Integer getOptionalInteger(int index) {
+	public BigInteger getOptionalBigInt(int index) {
+		return isNull(index) ? null : getBigInt(index);
+	}
+	
+	public int getInt(int index) {
+		return getBigInt(index).intValueExact();
+	}
+	
+	public Integer getOptionalInt(int index) {
 		return isNull(index) ? null : getInt(index);
 	}
 	
 	public long getLong(int index) {
-		Object o = get(index);
-		if (o instanceof Long)
-			return (Long)o;
-		if (o instanceof Integer)
-			return (Integer)o;
-		throw new ClassCastException();
+		return getBigInt(index).longValueExact();
 	}
 	
 	public Long getOptionalLong(int index) {
 		return isNull(index) ? null : getLong(index);
 	}
 	
-	public double getDouble(int index) {
+	public BigDecimal getBigDecimal(int index) {
 		Object o = get(index);
-		if (o instanceof Double)
-			return (Double)o;
-		if (o instanceof Long)
-			return (Long)o;
-		if (o instanceof Integer)
-			return (Integer)o;
+		if (o instanceof BigDecimal)
+			return (BigDecimal)o;
 		throw new ClassCastException();
+	}
+	
+	public BigDecimal getOptionalBigDecimal(int index) {
+		return isNull(index) ? null : getBigDecimal(index);
+	}
+	
+	public float getFloat(int index) {
+		return getBigDecimal(index).floatValue();
+	}
+	
+	public Float getOptionalFloat(int index) {
+		return isNull(index) ? null : getFloat(index);
+	}
+	
+	public double getDouble(int index) {
+		return getBigDecimal(index).doubleValue();
 	}
 	
 	public Double getOptionalDouble(int index) {
@@ -135,22 +185,43 @@ public class JSONList<T> extends ArrayList<T> {
 		return j;
 	}
 	
+	public JSONList<BigInteger> ofBigInts() {
+		JSONList<BigInteger> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getBigInt(i));
+		return j;
+	}
+	
 	public JSONList<Integer> ofInts() {
-		JSONList<Integer> j = new JSONList<>();
+		JSONList<Integer> j = new JSONList<>(Integer.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getInt(i));
 		return j;
 	}
 	
 	public JSONList<Long> ofLongs() {
-		JSONList<Long> j = new JSONList<>();
+		JSONList<Long> j = new JSONList<>(Long.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getLong(i));
 		return j;
 	}
 	
+	public JSONList<BigDecimal> ofBigDecimals() {
+		JSONList<BigDecimal> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getBigDecimal(i));
+		return j;
+	}
+	
+	public JSONList<Float> ofFloats() {
+		JSONList<Float> j = new JSONList<>(Float.class);
+		for (int i = 0; i < size(); i++)
+			j.add(getFloat(i));
+		return j;
+	}
+	
 	public JSONList<Double> ofDoubles() {
-		JSONList<Double> j = new JSONList<>();
+		JSONList<Double> j = new JSONList<>(Double.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getDouble(i));
 		return j;

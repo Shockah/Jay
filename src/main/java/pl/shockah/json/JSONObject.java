@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -27,9 +29,17 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	protected static Object prepareObject(Object o) {
 		if (o == null)
 			return null;
-		else if (o instanceof Boolean || o instanceof Integer || o instanceof Long || o instanceof Double
+		else if (o instanceof Boolean || o instanceof BigInteger || o instanceof BigDecimal
 			|| o instanceof String || o instanceof JSONObject || o instanceof JSONList<?>)
 			return o;
+		else if (o instanceof Integer)
+			return BigInteger.valueOf((Integer)o);
+		else if (o instanceof Long)
+			return BigInteger.valueOf((Long)o);
+		else if (o instanceof Float)
+			return BigDecimal.valueOf((Float)o);
+		else if (o instanceof Double)
+			return BigDecimal.valueOf((Double)o);
 		else if (o instanceof Map<?, ?>)
 			return new JSONObject((Map<String, Object>)o);
 		else if (o instanceof List<?>)
@@ -89,13 +99,30 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getBool(key));
 	}
 	
-	public int getInt(String key) {
+	public BigInteger getBigInt(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
 		Object o = get(key);
-		if (o instanceof Integer)
-			return (Integer)o;
+		if (o instanceof BigInteger)
+			return (BigInteger)o;
 		throw new ClassCastException();
+	}
+	
+	public BigInteger getBigInt(String key, BigInteger def) {
+		return containsKey(key) ? getBigInt(key) : def;
+	}
+	
+	public BigInteger getOptionalBigInt(String key) {
+		return containsKey(key) && !isNull(key) ? getBigInt(key) : null;
+	}
+	
+	public void onBigInt(String key, Action1<BigInteger> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getBigInt(key));
+	}
+	
+	public int getInt(String key) {
+		return getBigInt(key).intValueExact();
 	}
 	
 	public int getInt(String key, int def) {
@@ -112,14 +139,7 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	}
 	
 	public long getLong(String key) {
-		if (!containsKey(key))
-			throw new NullPointerException();
-		Object o = get(key);
-		if (o instanceof Long)
-			return (Long)o;
-		if (o instanceof Integer)
-			return (Integer)o;
-		throw new ClassCastException();
+		return getBigInt(key).longValueExact();
 	}
 	
 	public long getLong(String key, long def) {
@@ -135,17 +155,47 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getLong(key));
 	}
 	
-	public double getDouble(String key) {
+	public BigDecimal getBigDecimal(String key) {
 		if (!containsKey(key))
 			throw new NullPointerException();
 		Object o = get(key);
-		if (o instanceof Double)
-			return (Double)o;
-		if (o instanceof Long)
-			return (Long)o;
-		if (o instanceof Integer)
-			return (Integer)o;
+		if (o instanceof BigInteger)
+			return (BigDecimal)o;
 		throw new ClassCastException();
+	}
+	
+	public BigDecimal getBigDecimal(String key, BigDecimal def) {
+		return containsKey(key) ? getBigDecimal(key) : def;
+	}
+	
+	public BigDecimal getOptionalBigDecimal(String key) {
+		return containsKey(key) && !isNull(key) ? getBigDecimal(key) : null;
+	}
+	
+	public void onBigDecimal(String key, Action1<BigDecimal> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getBigDecimal(key));
+	}
+	
+	public float getFloat(String key) {
+		return getBigDecimal(key).floatValue();
+	}
+	
+	public float getFloat(String key, float def) {
+		return containsKey(key) ? getFloat(key) : def;
+	}
+	
+	public Float getOptionalFloat(String key) {
+		return containsKey(key) && !isNull(key) ? getFloat(key) : null;
+	}
+	
+	public void onFloat(String key, Action1<Float> f) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getFloat(key));
+	}
+	
+	public double getDouble(String key) {
+		return getBigDecimal(key).doubleValue();
 	}
 	
 	public double getDouble(String key, double def) {
