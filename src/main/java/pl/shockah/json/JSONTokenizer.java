@@ -1,5 +1,6 @@
 package pl.shockah.json;
 
+import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ public class JSONTokenizer {
 	protected static final String NULL_LITERAL = "null";
 	protected static final String TRUE_LITERAL = "true";
 	protected static final String FALSE_LITERAL = "false";
-	
+
+	@Nonnull
 	public List<Object> tokenize(String json) {
 		List<Object> tokens = new ArrayList<>();
 		
@@ -34,22 +36,27 @@ public class JSONTokenizer {
 				} else {
 					String literal = sb.toString();
 					buf.seek(-1);
-					if (literal.equals(NULL_LITERAL)) {
-						tokens.add(null);
-					} else if (literal.equals(TRUE_LITERAL)) {
-						tokens.add(true);
-					} else if (literal.equals(FALSE_LITERAL)) {
-						tokens.add(false);
-					} else {
-						try {
-							tokens.add(new BigInteger(literal));
-						} catch (NumberFormatException e1) {
+					switch (literal) {
+						case NULL_LITERAL:
+							tokens.add(null);
+							break;
+						case TRUE_LITERAL:
+							tokens.add(true);
+							break;
+						case FALSE_LITERAL:
+							tokens.add(false);
+							break;
+						default:
 							try {
-								tokens.add(new BigDecimal(literal));
-							} catch (NumberFormatException e2) {
-								throw new JSONParseException(String.format("Invalid literal '%s' at position %d", literal, openingPosition));
+								tokens.add(new BigInteger(literal));
+							} catch (NumberFormatException e1) {
+								try {
+									tokens.add(new BigDecimal(literal));
+								} catch (NumberFormatException e2) {
+									throw new JSONParseException(String.format("Invalid literal '%s' at position %d", literal, openingPosition));
+								}
 							}
-						}
+							break;
 					}
 					inLiteral = false;
 				}
@@ -80,7 +87,10 @@ public class JSONTokenizer {
 						oldc = 0;
 						continue;
 					} else {
-						throw new JSONParseException(String.format("Invalid string escape '\\%c' at position %d", c, buf.position - 2));
+						sb.append(c);
+						oldc = 0;
+						continue;
+						//throw new JSONParseException(String.format("Invalid string escape '\\%c' at position %d", c, buf.position - 2));
 					}
 				} else {
 					if (c == inString) {

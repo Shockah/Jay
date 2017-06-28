@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
 	compile 'com.github.Shockah:pl.shockah.util:1.0'
+	compile 'com.google.code.findbugs:jsr305:3.0.2'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

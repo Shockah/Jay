@@ -1,5 +1,6 @@
 package pl.shockah.json;
 
+import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
@@ -20,19 +21,23 @@ public class JSONPrettyPrinter extends JSONPrinter {
 	public JSONPrettyPrinter(String indent) {
 		this.indent = indent;
 	}
-	
+
+	@Nonnull
 	public JSONPrettyPrinter setCompactLiterals(int initialNewlineForAtLeast, int newlineEvery) {
 		compactLiterals = true;
 		addInitialCompactNewlineForAtLeast = initialNewlineForAtLeast;
 		addCompactNewlineEvery = newlineEvery;
 		return this;
 	}
-	
+
+	@Nonnull
 	public JSONPrettyPrinter resetCompactLiterals() {
 		compactLiterals = false;
 		return this;
 	}
-	
+
+	@Override
+	@Nonnull
 	public String toString(JSONObject j) {
 		return toString(j, 0);
 	}
@@ -67,7 +72,9 @@ public class JSONPrettyPrinter extends JSONPrinter {
 		sb.append('}');
 		return sb.toString();
 	}
-	
+
+	@Override
+	@Nonnull
 	public String toString(JSONList<?> j) {
 		return toString(j, 0);
 	}

@@ -1,10 +1,12 @@
 package pl.shockah.json;
 
+import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
 
 public class JSONPrinter {
+	@Nonnull
 	public String toString(JSONObject j) {
 		StringBuilder sb = new StringBuilder();
 		sb.append('{');
@@ -23,7 +25,8 @@ public class JSONPrinter {
 		sb.append('}');
 		return sb.toString();
 	}
-	
+
+	@Nonnull
 	public String toString(JSONList<?> j) {
 		StringBuilder sb = new StringBuilder();
 		sb.append('[');

@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -13,11 +15,13 @@ public class JSONList<T> extends ArrayList<T> {
 	protected final Class<T> clazz;
 	
 	@SafeVarargs
+	@Nonnull
 	public static <T> JSONList<T> of(T... values) {
 		return of(null, values);
 	}
 	
 	@SafeVarargs
+	@Nonnull
 	public static <T> JSONList<T> of(Class<T> clazz, T... values) {
 		JSONList<T> j = new JSONList<>(clazz);
 		j.addAll(Arrays.asList(values));
@@ -86,18 +90,21 @@ public class JSONList<T> extends ArrayList<T> {
 			return (Boolean)o;
 		throw new ClassCastException();
 	}
-	
+
+	@Nullable
 	public Boolean getOptionalBool(int index) {
 		return isNull(index) ? null : getBool(index);
 	}
-	
+
+	@Nonnull
 	public BigInteger getBigInt(int index) {
 		Object o = get(index);
 		if (o instanceof BigInteger)
 			return (BigInteger)o;
 		throw new ClassCastException();
 	}
-	
+
+	@Nullable
 	public BigInteger getOptionalBigInt(int index) {
 		return isNull(index) ? null : getBigInt(index);
 	}
@@ -105,7 +112,8 @@ public class JSONList<T> extends ArrayList<T> {
 	public int getInt(int index) {
 		return getBigInt(index).intValueExact();
 	}
-	
+
+	@Nullable
 	public Integer getOptionalInt(int index) {
 		return isNull(index) ? null : getInt(index);
 	}
@@ -113,18 +121,21 @@ public class JSONList<T> extends ArrayList<T> {
 	public long getLong(int index) {
 		return getBigInt(index).longValueExact();
 	}
-	
+
+	@Nullable
 	public Long getOptionalLong(int index) {
 		return isNull(index) ? null : getLong(index);
 	}
-	
+
+	@Nonnull
 	public BigDecimal getBigDecimal(int index) {
 		Object o = get(index);
 		if (o instanceof BigDecimal)
 			return (BigDecimal)o;
 		throw new ClassCastException();
 	}
-	
+
+	@Nullable
 	public BigDecimal getOptionalBigDecimal(int index) {
 		return isNull(index) ? null : getBigDecimal(index);
 	}
@@ -132,7 +143,8 @@ public class JSONList<T> extends ArrayList<T> {
 	public float getFloat(int index) {
 		return getBigDecimal(index).floatValue();
 	}
-	
+
+	@Nullable
 	public Float getOptionalFloat(int index) {
 		return isNull(index) ? null : getFloat(index);
 	}
@@ -140,107 +152,124 @@ public class JSONList<T> extends ArrayList<T> {
 	public double getDouble(int index) {
 		return getBigDecimal(index).doubleValue();
 	}
-	
+
+	@Nullable
 	public Double getOptionalDouble(int index) {
 		return isNull(index) ? null : getDouble(index);
 	}
-	
+
+	@Nonnull
 	public String getString(int index) {
 		Object o = get(index);
 		if (o instanceof String)
 			return (String)o;
 		throw new ClassCastException();
 	}
-	
+
+	@Nullable
 	public String getOptionalString(int index) {
 		return isNull(index) ? null : getString(index);
 	}
-	
+
+	@Nonnull
 	public JSONObject getObject(int index) {
 		Object o = get(index);
 		if (o instanceof JSONObject)
 			return (JSONObject)o;
 		throw new ClassCastException();
 	}
-	
+
+	@Nullable
 	public JSONObject getOptionalObject(int index) {
 		return isNull(index) ? null : getObject(index);
 	}
-	
+
+	@Nonnull
 	public JSONList<?> getList(int index) {
 		Object o = get(index);
 		if (o instanceof JSONList<?>)
 			return (JSONList<?>)o;
 		throw new ClassCastException();
 	}
-	
+
+	@Nullable
 	public JSONList<?> getOptionalList(int index) {
 		return isNull(index) ? null : getList(index);
 	}
-	
+
+	@Nonnull
 	public JSONList<Boolean> ofBooleans() {
 		JSONList<Boolean> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getBool(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<BigInteger> ofBigInts() {
 		JSONList<BigInteger> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getBigInt(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<Integer> ofInts() {
 		JSONList<Integer> j = new JSONList<>(Integer.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getInt(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<Long> ofLongs() {
 		JSONList<Long> j = new JSONList<>(Long.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getLong(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<BigDecimal> ofBigDecimals() {
 		JSONList<BigDecimal> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getBigDecimal(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<Float> ofFloats() {
 		JSONList<Float> j = new JSONList<>(Float.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getFloat(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<Double> ofDoubles() {
 		JSONList<Double> j = new JSONList<>(Double.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getDouble(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<String> ofStrings() {
 		JSONList<String> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getString(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<JSONObject> ofObjects() {
 		JSONList<JSONObject> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getObject(i));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<JSONList<?>> ofLists() {
 		JSONList<JSONList<?>> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
@@ -249,6 +278,7 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Nonnull
 	public JSONObject addNewObject() {
 		JSONObject j = new JSONObject();
 		add((T)j);
@@ -256,6 +286,7 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Nonnull
 	public JSONList<?> addNewList() {
 		JSONList<Object> j = new JSONList<>();
 		add((T)j);

@@ -1,5 +1,6 @@
 package pl.shockah.json;
 
+import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
@@ -11,9 +12,9 @@ public class JSONParser {
 		else if (token instanceof Boolean)
 			return ((Boolean)token) ? "true" : "false";
 		else if (token instanceof BigInteger)
-			return ((BigInteger)token).toString();
+			return token.toString();
 		else if (token instanceof BigDecimal)
-			return ((BigDecimal)token).toString();
+			return token.toString();
 		else if (token instanceof String)
 			return String.format("'%s'", token);
 		else if (token instanceof JSONSpecialToken)
@@ -21,7 +22,8 @@ public class JSONParser {
 		else
 			throw new UnsupportedOperationException(String.format("Unknown token type: %s", token.getClass().getName()));
 	}
-	
+
+	@Nonnull
 	public JSONObject parseObject(String json) {
 		List<Object> tokens = new JSONTokenizer().tokenize(json);
 		TokenBuffer buf = new TokenBuffer(tokens);
@@ -30,7 +32,8 @@ public class JSONParser {
 			throw new JSONParseException(String.format("Additional token %s after the ObjectEnd token", tokenToString(buf.get())));
 		return j;
 	}
-	
+
+	@Nonnull
 	public JSONList<Object> parseList(String json) {
 		List<Object> tokens = new JSONTokenizer().tokenize(json);
 		TokenBuffer buf = new TokenBuffer(tokens);
@@ -88,7 +91,7 @@ public class JSONParser {
 			Object token = buf.get();
 			if (j == null) {
 				if (token == JSONSpecialToken.ListBegin) {
-					j = new JSONList<Object>();
+					j = new JSONList<>();
 				} else {
 					throw new JSONParseException(String.format("Invalid token %s; expected ListBegin", tokenToString(token)));
 				}
