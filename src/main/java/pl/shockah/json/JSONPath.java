@@ -1,5 +1,6 @@
 package pl.shockah.json;
 
+import pl.shockah.util.func.Action0;
 import pl.shockah.util.func.Action1;
 
 import javax.annotation.Nonnull;
@@ -35,6 +36,10 @@ public class JSONPath {
 	public void onBool(String path, Action1<Boolean> f) {
 		onBool(splitPath(path), f);
 	}
+
+	public void onBool(String path, Action1<Boolean> f, Action0 orElse) {
+		onBool(splitPath(path), f, orElse);
+	}
 	
 	protected boolean getBool(String[] path) {
 		if (path.length == 1)
@@ -64,6 +69,13 @@ public class JSONPath {
 			new JSONPath(json.getObject(path[0])).onBool(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
+	protected void onBool(String[] path, Action1<Boolean> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onBool(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onBool(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
+
 	@Nonnull
 	public BigInteger getBigInt(String path) {
 		return getBigInt(splitPath(path));
@@ -81,6 +93,10 @@ public class JSONPath {
 	
 	public void onBigInt(String path, Action1<BigInteger> f) {
 		onBigInt(splitPath(path), f);
+	}
+
+	public void onBigInt(String path, Action1<BigInteger> f, Action0 orElse) {
+		onBigInt(splitPath(path), f, orElse);
 	}
 
 	@Nonnull
@@ -112,6 +128,13 @@ public class JSONPath {
 		else
 			new JSONPath(json.getObject(path[0])).onBigInt(Arrays.copyOfRange(path, 1, path.length), f);
 	}
+
+	protected void onBigInt(String[] path, Action1<BigInteger> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onBigInt(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onBigInt(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
 	
 	public int getInt(String path) {
 		return getInt(splitPath(path));
@@ -128,6 +151,10 @@ public class JSONPath {
 	
 	public void onInt(String path, Action1<Integer> f) {
 		onInt(splitPath(path), f);
+	}
+
+	public void onInt(String path, Action1<Integer> f, Action0 orElse) {
+		onInt(splitPath(path), f, orElse);
 	}
 	
 	protected int getInt(String[] path) {
@@ -157,6 +184,13 @@ public class JSONPath {
 		else
 			new JSONPath(json.getObject(path[0])).onInt(Arrays.copyOfRange(path, 1, path.length), f);
 	}
+
+	protected void onInt(String[] path, Action1<Integer> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onInt(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onInt(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
 	
 	public long getLong(String path) {
 		return getLong(splitPath(path));
@@ -173,6 +207,10 @@ public class JSONPath {
 	
 	public void onLong(String path, Action1<Long> f) {
 		onLong(splitPath(path), f);
+	}
+
+	public void onLong(String path, Action1<Long> f, Action0 orElse) {
+		onLong(splitPath(path), f, orElse);
 	}
 	
 	protected long getLong(String[] path) {
@@ -203,6 +241,13 @@ public class JSONPath {
 			new JSONPath(json.getObject(path[0])).onLong(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
+	protected void onLong(String[] path, Action1<Long> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onLong(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onLong(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
+
 	@Nonnull
 	public BigDecimal getBigDecimal(String path) {
 		return getBigDecimal(splitPath(path));
@@ -220,6 +265,10 @@ public class JSONPath {
 	
 	public void onBigDecimal(String path, Action1<BigDecimal> f) {
 		onBigDecimal(splitPath(path), f);
+	}
+
+	public void onBigDecimal(String path, Action1<BigDecimal> f, Action0 orElse) {
+		onBigDecimal(splitPath(path), f, orElse);
 	}
 
 	@Nonnull
@@ -251,6 +300,13 @@ public class JSONPath {
 		else
 			new JSONPath(json.getObject(path[0])).onBigDecimal(Arrays.copyOfRange(path, 1, path.length), f);
 	}
+
+	protected void onBigDecimal(String[] path, Action1<BigDecimal> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onBigDecimal(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onBigDecimal(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
 	
 	public float getFloat(String path) {
 		return getFloat(splitPath(path));
@@ -267,6 +323,10 @@ public class JSONPath {
 	
 	public void onFloat(String path, Action1<Float> f) {
 		onFloat(splitPath(path), f);
+	}
+
+	public void onFloat(String path, Action1<Float> f, Action0 orElse) {
+		onFloat(splitPath(path), f, orElse);
 	}
 	
 	protected float getFloat(String[] path) {
@@ -296,6 +356,13 @@ public class JSONPath {
 		else
 			new JSONPath(json.getObject(path[0])).onFloat(Arrays.copyOfRange(path, 1, path.length), f);
 	}
+
+	protected void onFloat(String[] path, Action1<Float> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onFloat(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onFloat(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
 	
 	public double getDouble(String path) {
 		return getDouble(splitPath(path));
@@ -312,6 +379,10 @@ public class JSONPath {
 	
 	public void onDouble(String path, Action1<Double> f) {
 		onDouble(splitPath(path), f);
+	}
+
+	public void onDouble(String path, Action1<Double> f, Action0 orElse) {
+		onDouble(splitPath(path), f, orElse);
 	}
 	
 	protected double getDouble(String[] path) {
@@ -342,6 +413,13 @@ public class JSONPath {
 			new JSONPath(json.getObject(path[0])).onDouble(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
+	protected void onDouble(String[] path, Action1<Double> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onDouble(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onDouble(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
+
 	@Nonnull
 	public String getString(String path) {
 		return getString(splitPath(path));
@@ -359,6 +437,10 @@ public class JSONPath {
 	
 	public void onString(String path, Action1<String> f) {
 		onString(splitPath(path), f);
+	}
+
+	public void onString(String path, Action1<String> f, Action0 orElse) {
+		onString(splitPath(path), f, orElse);
 	}
 
 	@Nonnull
@@ -391,6 +473,13 @@ public class JSONPath {
 			new JSONPath(json.getObject(path[0])).onString(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
+	protected void onString(String[] path, Action1<String> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onString(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onString(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
+
 	@Nonnull
 	public JSONObject getObject(String path) {
 		return getObject(splitPath(path));
@@ -418,6 +507,10 @@ public class JSONPath {
 	
 	public void onObject(String path, Action1<JSONObject> f) {
 		onObject(splitPath(path), f);
+	}
+
+	public void onObject(String path, Action1<JSONObject> f, Action0 orElse) {
+		onObject(splitPath(path), f, orElse);
 	}
 
 	@Nonnull
@@ -468,6 +561,13 @@ public class JSONPath {
 			new JSONPath(json.getObject(path[0])).onObject(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
+	protected void onObject(String[] path, Action1<JSONObject> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onObject(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onObject(Arrays.copyOfRange(path, 1, path.length), f, orElse);
+	}
+
 	@Nonnull
 	public JSONList<?> getList(String path) {
 		return getList(splitPath(path));
@@ -495,6 +595,10 @@ public class JSONPath {
 	
 	public void onList(String path, Action1<JSONList<?>> f) {
 		onList(splitPath(path), f);
+	}
+
+	public void onList(String path, Action1<JSONList<?>> f, Action0 orElse) {
+		onList(splitPath(path), f, orElse);
 	}
 
 	@Nonnull
@@ -543,6 +647,13 @@ public class JSONPath {
 			json.onList(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onList(Arrays.copyOfRange(path, 1, path.length), f);
+	}
+
+	protected void onList(String[] path, Action1<JSONList<?>> f, Action0 orElse) {
+		if (path.length == 1)
+			json.onList(path[0], f, orElse);
+		else
+			new JSONPath(json.getObject(path[0])).onList(Arrays.copyOfRange(path, 1, path.length), f, orElse);
 	}
 	
 	public void put(String path, Object value) {

@@ -1,5 +1,6 @@
 package pl.shockah.json;
 
+import pl.shockah.util.func.Action0;
 import pl.shockah.util.func.Action1;
 
 import javax.annotation.Nonnull;
@@ -100,6 +101,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getBool(key));
 	}
 
+	public void onBool(String key, Action1<Boolean> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getBool(key));
+		else
+			orElse.call();
+	}
+
 	@Nonnull
 	public BigInteger getBigInt(String key) {
 		if (!containsKey(key))
@@ -124,6 +132,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBigInt(key));
 	}
+
+	public void onBigInt(String key, Action1<BigInteger> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getBigInt(key));
+		else
+			orElse.call();
+	}
 	
 	public int getInt(String key) {
 		return getBigInt(key).intValueExact();
@@ -142,6 +157,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		if (containsKey(key) && !isNull(key))
 			f.call(getInt(key));
 	}
+
+	public void onInt(String key, Action1<Integer> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getInt(key));
+		else
+			orElse.call();
+	}
 	
 	public long getLong(String key) {
 		return getBigInt(key).longValueExact();
@@ -159,6 +181,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	public void onLong(String key, Action1<Long> f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getLong(key));
+	}
+
+	public void onLong(String key, Action1<Long> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getLong(key));
+		else
+			orElse.call();
 	}
 
 	@Nonnull
@@ -185,6 +214,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBigDecimal(key));
 	}
+
+	public void onBigDecimal(String key, Action1<BigDecimal> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getBigDecimal(key));
+		else
+			orElse.call();
+	}
 	
 	public float getFloat(String key) {
 		return getBigDecimal(key).floatValue();
@@ -203,6 +239,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		if (containsKey(key) && !isNull(key))
 			f.call(getFloat(key));
 	}
+
+	public void onFloat(String key, Action1<Float> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getFloat(key));
+		else
+			orElse.call();
+	}
 	
 	public double getDouble(String key) {
 		return getBigDecimal(key).doubleValue();
@@ -220,6 +263,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	public void onDouble(String key, Action1<Double> f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getDouble(key));
+	}
+
+	public void onDouble(String key, Action1<Double> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getDouble(key));
+		else
+			orElse.call();
 	}
 
 	@Nonnull
@@ -245,6 +295,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	public void onString(String key, Action1<String> f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getString(key));
+	}
+
+	public void onString(String key, Action1<String> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getString(key));
+		else
+			orElse.call();
 	}
 
 	@Nonnull
@@ -288,6 +345,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getObject(key));
 	}
 
+	public void onObject(String key, Action1<JSONObject> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getObject(key));
+		else
+			orElse.call();
+	}
+
 	@Nonnull
 	public JSONList<?> getList(String key) {
 		if (!containsKey(key))
@@ -327,6 +391,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	public void onList(String key, Action1<JSONList<?>> f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getList(key));
+	}
+
+	public void onList(String key, Action1<JSONList<?>> f, Action0 orElse) {
+		if (containsKey(key) && !isNull(key))
+			f.call(getList(key));
+		else
+			orElse.call();
 	}
 	
 	public boolean putDefault(String key, Object value) {
