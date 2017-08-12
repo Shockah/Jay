@@ -12,28 +12,32 @@ import java.util.List;
 public class JSONList<T> extends ArrayList<T> {
 	private static final long serialVersionUID = 1574253633071750087L;
 	
-	protected final Class<T> clazz;
+	@Nullable protected final Class<T> clazz;
 	
 	@SafeVarargs
 	@Nonnull
 	public static <T> JSONList<T> of(T... values) {
-		return of(null, values);
-	}
-	
-	@SafeVarargs
-	@Nonnull
-	public static <T> JSONList<T> of(Class<T> clazz, T... values) {
-		JSONList<T> j = new JSONList<>(clazz);
+		JSONList<T> j = new JSONList<>();
 		j.addAll(Arrays.asList(values));
 		return j;
 	}
 	
-	protected static Object prepareObject(Object o) {
+	@SafeVarargs
+	@Nonnull
+	public static <T> JSONList<T> of(@Nonnull Class<T> clazz, T... values) {
+		JSONList<T> j = new JSONList<>(clazz);
+		j.addAll(Arrays.asList(values));
+		return j;
+	}
+
+	@Nullable
+	protected static Object prepareObject(@Nullable Object o) {
 		return JSONObject.prepareObject(o);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected static <T> List<T> prepareObjects(Collection<?> c) {
+	@Nonnull
+	protected static <T> List<T> prepareObjects(@Nonnull Collection<?> c) {
 		List<T> ret = new ArrayList<>();
 		for (Object o : c)
 			ret.add((T)prepareObject(o));
@@ -41,31 +45,34 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 	
 	public JSONList() {
-		this((Class<T>)null);
+		super();
+		this.clazz = null;
 	}
 	
-	public JSONList(List<T> list) {
-		this(null, list);
+	public JSONList(@Nonnull List<T> list) {
+		this();
+		addAll(list);
 	}
 	
-	public JSONList(Class<T> clazz) {
+	public JSONList(@Nonnull Class<T> clazz) {
 		super();
 		this.clazz = clazz;
 	}
 	
-	public JSONList(Class<T> clazz, List<T> list) {
-		super();
-		this.clazz = clazz;
+	public JSONList(@Nonnull Class<T> clazz, @Nonnull List<T> list) {
+		this(clazz);
 		addAll(list);
 	}
 	
 	@Override
+	@Nonnull
 	public String toString() {
 		return new JSONPrettyPrinter().toString(this);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
+	@Nullable
 	public T get(int index) {
 		if (clazz != null) {
 			if (clazz == Integer.class)
@@ -295,23 +302,23 @@ public class JSONList<T> extends ArrayList<T> {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean add(T e) {
+	public boolean add(@Nullable T e) {
 		return super.add((T)prepareObject(e));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void add(int index, T element) {
+	public void add(int index, @Nullable T element) {
 		super.add(index, (T)prepareObject(element));
 	}
 	
 	@Override
-	public boolean addAll(Collection<? extends T> c) {
+	public boolean addAll(@Nonnull Collection<? extends T> c) {
 		return super.addAll(prepareObjects(c));
 	}
 	
 	@Override
-	public boolean addAll(int index, Collection<? extends T> c) {
+	public boolean addAll(int index, @Nonnull Collection<? extends T> c) {
 		return super.addAll(index, prepareObjects(c));
 	}
 }

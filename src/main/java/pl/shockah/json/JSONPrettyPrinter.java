@@ -1,6 +1,7 @@
 package pl.shockah.json;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
@@ -38,11 +39,12 @@ public class JSONPrettyPrinter extends JSONPrinter {
 
 	@Override
 	@Nonnull
-	public String toString(JSONObject j) {
+	public String toString(@Nonnull JSONObject j) {
 		return toString(j, 0);
 	}
-	
-	protected String toString(JSONObject j, int indentLevel) {
+
+	@Nonnull
+	protected String toString(@Nonnull JSONObject j, int indentLevel) {
 		StringBuilder sb = new StringBuilder();
 		sb.append('{');
 		
@@ -75,11 +77,12 @@ public class JSONPrettyPrinter extends JSONPrinter {
 
 	@Override
 	@Nonnull
-	public String toString(JSONList<?> j) {
+	public String toString(@Nonnull JSONList<?> j) {
 		return toString(j, 0);
 	}
-	
-	protected String toString(JSONList<?> j, int indentLevel) {
+
+	@Nonnull
+	protected String toString(@Nonnull JSONList<?> j, int indentLevel) {
 		StringBuilder sb = new StringBuilder();
 		sb.append('[');
 		
@@ -147,8 +150,9 @@ public class JSONPrettyPrinter extends JSONPrinter {
 		
 		return sb.toString();
 	}
-	
-	protected String toString(Object o, int indentLevel) {
+
+	@Nonnull
+	protected String toString(@Nullable Object o, int indentLevel) {
 		if (o == null)
 			return "null";
 		else if (o instanceof String)
@@ -156,9 +160,9 @@ public class JSONPrettyPrinter extends JSONPrinter {
 		else if (o instanceof Boolean)
 			return (Boolean)o ? "true" : "false";
 		else if (o instanceof BigInteger)
-			return ((BigInteger)o).toString();
+			return o.toString();
 		else if (o instanceof BigDecimal)
-			return ((BigDecimal)o).toString();
+			return o.toString();
 		else if (o instanceof JSONObject)
 			return toString((JSONObject)o, indentLevel);
 		else if (o instanceof JSONList<?>)
@@ -167,7 +171,7 @@ public class JSONPrettyPrinter extends JSONPrinter {
 			throw new IllegalArgumentException();
 	}
 	
-	protected void insertIndent(StringBuilder sb, int indentLevel) {
+	protected void insertIndent(@Nonnull StringBuilder sb, int indentLevel) {
 		for (int i = 0; i < indentLevel; i++)
 			sb.append(indent);
 	}

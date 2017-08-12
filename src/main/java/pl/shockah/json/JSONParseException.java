@@ -1,5 +1,7 @@
 package pl.shockah.json;
 
+import javax.annotation.Nonnull;
+
 public class JSONParseException extends RuntimeException {
 	private static final long serialVersionUID = 3759792316306049206L;
 	
@@ -7,11 +9,11 @@ public class JSONParseException extends RuntimeException {
 		super();
 	}
 	
-	public JSONParseException(String message) {
+	public JSONParseException(@Nonnull String message) {
 		super(message);
 	}
 	
-	public JSONParseException(Throwable throwable) {
+	public JSONParseException(@Nonnull Throwable throwable) {
 		super(throwable);
 	}
 }

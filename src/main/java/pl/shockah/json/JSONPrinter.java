@@ -1,13 +1,14 @@
 package pl.shockah.json;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
 
 public class JSONPrinter {
 	@Nonnull
-	public String toString(JSONObject j) {
+	public String toString(@Nonnull JSONObject j) {
 		StringBuilder sb = new StringBuilder();
 		sb.append('{');
 		
@@ -27,7 +28,7 @@ public class JSONPrinter {
 	}
 
 	@Nonnull
-	public String toString(JSONList<?> j) {
+	public String toString(@Nonnull JSONList<?> j) {
 		StringBuilder sb = new StringBuilder();
 		sb.append('[');
 		
@@ -43,8 +44,9 @@ public class JSONPrinter {
 		sb.append(']');
 		return sb.toString();
 	}
-	
-	protected String toString(String s) {
+
+	@Nonnull
+	protected String toString(@Nonnull String s) {
 		s = s.replace("\\", "\\\\");
 		s = s.replace("\r", "\\r");
 		s = s.replace("\n", "\\n");
@@ -52,8 +54,9 @@ public class JSONPrinter {
 		s = s.replace("\"", "\\\"");
 		return String.format("\"%s\"", s);
 	}
-	
-	protected String toString(Object o) {
+
+	@Nonnull
+	protected String toString(@Nullable Object o) {
 		if (o == null)
 			return "null";
 		else if (o instanceof String)
@@ -61,9 +64,9 @@ public class JSONPrinter {
 		else if (o instanceof Boolean)
 			return (Boolean)o ? "true" : "false";
 		else if (o instanceof BigInteger)
-			return ((BigInteger)o).toString();
+			return o.toString();
 		else if (o instanceof BigDecimal)
-			return ((BigDecimal)o).toString();
+			return o.toString();
 		else if (o instanceof JSONObject)
 			return toString((JSONObject)o);
 		else if (o instanceof JSONList<?>)

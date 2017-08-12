@@ -1,12 +1,14 @@
 package pl.shockah.json;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
 public class JSONParser {
-	protected String tokenToString(Object token) {
+	@Nonnull
+	protected String tokenToString(@Nullable Object token) {
 		if (token == null)
 			return "null";
 		else if (token instanceof Boolean)
@@ -24,7 +26,7 @@ public class JSONParser {
 	}
 
 	@Nonnull
-	public JSONObject parseObject(String json) {
+	public JSONObject parseObject(@Nonnull String json) {
 		List<Object> tokens = new JSONTokenizer().tokenize(json);
 		TokenBuffer buf = new TokenBuffer(tokens);
 		JSONObject j = parseObject(buf);
@@ -34,7 +36,7 @@ public class JSONParser {
 	}
 
 	@Nonnull
-	public JSONList<Object> parseList(String json) {
+	public JSONList<Object> parseList(@Nonnull String json) {
 		List<Object> tokens = new JSONTokenizer().tokenize(json);
 		TokenBuffer buf = new TokenBuffer(tokens);
 		JSONList<Object> j = parseList(buf);
@@ -42,8 +44,9 @@ public class JSONParser {
 			throw new JSONParseException(String.format("Additional token %s after the ListEnd token", tokenToString(buf.get())));
 		return j;
 	}
-	
-	protected JSONObject parseObject(TokenBuffer buf) {
+
+	@Nonnull
+	protected JSONObject parseObject(@Nonnull TokenBuffer buf) {
 		JSONObject j = null;
 		while (buf.hasLeft()) {
 			Object token = buf.get();
@@ -84,8 +87,9 @@ public class JSONParser {
 		}
 		throw new JSONParseException("Missing token; expected ObjectEnd");
 	}
-	
-	protected JSONList<Object> parseList(TokenBuffer buf) {
+
+	@Nonnull
+	protected JSONList<Object> parseList(@Nonnull TokenBuffer buf) {
 		JSONList<Object> j = null;
 		while (buf.hasLeft()) {
 			Object token = buf.get();
@@ -111,8 +115,9 @@ public class JSONParser {
 		}
 		throw new JSONParseException("Missing token; expected ListEnd");
 	}
-	
-	protected Object parseValue(TokenBuffer buf) {
+
+	@Nullable
+	protected Object parseValue(@Nonnull TokenBuffer buf) {
 		if (!buf.hasLeft())
 			throw new JSONParseException("Missing token; expected value token");
 		Object token = buf.get();
@@ -133,10 +138,10 @@ public class JSONParser {
 	}
 	
 	protected static class TokenBuffer {
-		public final List<Object> list;
+		@Nonnull public final List<Object> list;
 		public int position = 0;
 		
-		public TokenBuffer(List<Object> list) {
+		public TokenBuffer(@Nonnull List<Object> list) {
 			this.list = list;
 		}
 		
@@ -164,7 +169,8 @@ public class JSONParser {
 				throw new IndexOutOfBoundsException();
 			this.position = position;
 		}
-		
+
+		@Nullable
 		public Object get() {
 			if (position >= list.size())
 				throw new IndexOutOfBoundsException();

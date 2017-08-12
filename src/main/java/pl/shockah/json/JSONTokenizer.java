@@ -13,7 +13,7 @@ public class JSONTokenizer {
 	protected static final String FALSE_LITERAL = "false";
 
 	@Nonnull
-	public List<Object> tokenize(String json) {
+	public List<Object> tokenize(@Nonnull String json) {
 		List<Object> tokens = new ArrayList<>();
 		
 		StrBuffer buf = new StrBuffer(json);
@@ -31,8 +31,7 @@ public class JSONTokenizer {
 					throw new JSONParseException("Invalid JSON file: reached end of string");
 				} else if (LITERAL_ALLOWED_CHARACTERS.indexOf(c) != -1) {
 					sb.append(c);
-					if (c != 0)
-						continue;
+					continue;
 				} else {
 					String literal = sb.toString();
 					buf.seek(-1);
@@ -153,10 +152,10 @@ public class JSONTokenizer {
 	}
 	
 	protected static class StrBuffer {
-		public final String string;
+		@Nonnull public final String string;
 		public int position = 0;
 		
-		public StrBuffer(String string) {
+		public StrBuffer(@Nonnull String string) {
 			this.string = string;
 		}
 		
@@ -190,7 +189,8 @@ public class JSONTokenizer {
 				throw new IndexOutOfBoundsException();
 			return string.charAt(position++);
 		}
-		
+
+		@Nonnull
 		public String read(int length) {
 			int pos = position;
 			try {
