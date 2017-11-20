@@ -1,4 +1,4 @@
-package pl.shockah.json;
+package pl.shockah.jay;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

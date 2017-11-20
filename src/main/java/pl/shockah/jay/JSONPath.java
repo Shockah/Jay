@@ -1,4 +1,4 @@
-package pl.shockah.json;
+package pl.shockah.jay;
 
 import pl.shockah.util.func.Action0;
 import pl.shockah.util.func.Action1;
