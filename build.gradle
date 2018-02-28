@@ -1,4 +1,20 @@
-apply plugin: 'java'
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven {
+			url "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+		jcenter()
+	}
+
+	dependencies {
+		classpath "me.tatarka:gradle-retrolambda:3.7.0"
+	}
+}
+
+apply plugin: "java"
+apply plugin: "me.tatarka.retrolambda"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -6,16 +22,16 @@ targetCompatibility = 1.8
 repositories {
 	jcenter()
 	maven {
-		url 'https://jitpack.io'
+		url "https://jitpack.io"
 	}
 }
 
 dependencies {
-	compile 'com.github.Shockah:pl.shockah.util:1.0'
-	compile 'com.google.code.findbugs:jsr305:3.0.2'
+	compile "com.github.Shockah:pl.shockah.util:1.0"
+	compile "com.google.code.findbugs:jsr305:3.0.2"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
+	classifier = "sources"
 	from sourceSets.main.allSource
 }
