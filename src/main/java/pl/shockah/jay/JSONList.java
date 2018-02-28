@@ -92,7 +92,7 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 	
 	public boolean getBool(int index) {
-		Object o = get(index);
+		Object o = super.get(index);
 		if (o instanceof Boolean)
 			return (Boolean)o;
 		throw new ClassCastException();
@@ -105,7 +105,7 @@ public class JSONList<T> extends ArrayList<T> {
 
 	@Nonnull
 	public BigInteger getBigInt(int index) {
-		Object o = get(index);
+		Object o = super.get(index);
 		if (o instanceof BigInteger)
 			return (BigInteger)o;
 		throw new ClassCastException();
@@ -136,7 +136,7 @@ public class JSONList<T> extends ArrayList<T> {
 
 	@Nonnull
 	public BigDecimal getBigDecimal(int index) {
-		Object o = get(index);
+		Object o = super.get(index);
 		if (o instanceof BigDecimal)
 			return (BigDecimal)o;
 		else if (o instanceof BigInteger)
@@ -169,7 +169,7 @@ public class JSONList<T> extends ArrayList<T> {
 
 	@Nonnull
 	public String getString(int index) {
-		Object o = get(index);
+		Object o = super.get(index);
 		if (o instanceof String)
 			return (String)o;
 		throw new ClassCastException();
@@ -182,7 +182,7 @@ public class JSONList<T> extends ArrayList<T> {
 
 	@Nonnull
 	public JSONObject getObject(int index) {
-		Object o = get(index);
+		Object o = super.get(index);
 		if (o instanceof JSONObject)
 			return (JSONObject)o;
 		throw new ClassCastException();
@@ -195,7 +195,7 @@ public class JSONList<T> extends ArrayList<T> {
 
 	@Nonnull
 	public JSONList<?> getList(int index) {
-		Object o = get(index);
+		Object o = super.get(index);
 		if (o instanceof JSONList<?>)
 			return (JSONList<?>)o;
 		throw new ClassCastException();
