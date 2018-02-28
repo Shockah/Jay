@@ -139,6 +139,8 @@ public class JSONList<T> extends ArrayList<T> {
 		Object o = get(index);
 		if (o instanceof BigDecimal)
 			return (BigDecimal)o;
+		else if (o instanceof BigInteger)
+			return new BigDecimal((BigInteger)o);
 		throw new ClassCastException();
 	}
 
