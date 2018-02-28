@@ -1,8 +1,5 @@
 package pl.shockah.jay;
 
-import pl.shockah.util.func.Action0;
-import pl.shockah.util.func.Action1;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
@@ -98,12 +95,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getBool(key) : null;
 	}
 	
-	public void onBool(@Nonnull String key, @Nonnull Action1<Boolean> f) {
+	public void onBool(@Nonnull String key, @Nonnull Func.BooleanFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBool(key));
 	}
 
-	public void onBool(@Nonnull String key, @Nonnull Action1<Boolean> f, @Nonnull Action0 orElse) {
+	public void onBool(@Nonnull String key, @Nonnull Func.BooleanFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBool(key));
 		else
@@ -130,12 +127,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getBigInt(key) : null;
 	}
 	
-	public void onBigInt(@Nonnull String key, @Nonnull Action1<BigInteger> f) {
+	public void onBigInt(@Nonnull String key, @Nonnull Func.BigIntegerFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBigInt(key));
 	}
 
-	public void onBigInt(@Nonnull String key, @Nonnull Action1<BigInteger> f, @Nonnull Action0 orElse) {
+	public void onBigInt(@Nonnull String key, @Nonnull Func.BigIntegerFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBigInt(key));
 		else
@@ -155,12 +152,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getInt(key) : null;
 	}
 	
-	public void onInt(@Nonnull String key, @Nonnull Action1<Integer> f) {
+	public void onInt(@Nonnull String key, @Nonnull Func.IntFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getInt(key));
 	}
 
-	public void onInt(@Nonnull String key, @Nonnull Action1<Integer> f, @Nonnull Action0 orElse) {
+	public void onInt(@Nonnull String key, @Nonnull Func.IntFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getInt(key));
 		else
@@ -180,12 +177,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getLong(key) : null;
 	}
 	
-	public void onLong(@Nonnull String key, @Nonnull Action1<Long> f) {
+	public void onLong(@Nonnull String key, @Nonnull Func.LongFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getLong(key));
 	}
 
-	public void onLong(@Nonnull String key, @Nonnull Action1<Long> f, @Nonnull Action0 orElse) {
+	public void onLong(@Nonnull String key, @Nonnull Func.LongFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getLong(key));
 		else
@@ -212,12 +209,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getBigDecimal(key) : null;
 	}
 	
-	public void onBigDecimal(@Nonnull String key, @Nonnull Action1<BigDecimal> f) {
+	public void onBigDecimal(@Nonnull String key, @Nonnull Func.BigDecimalFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBigDecimal(key));
 	}
 
-	public void onBigDecimal(@Nonnull String key, @Nonnull Action1<BigDecimal> f, @Nonnull Action0 orElse) {
+	public void onBigDecimal(@Nonnull String key, @Nonnull Func.BigDecimalFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getBigDecimal(key));
 		else
@@ -237,12 +234,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getFloat(key) : null;
 	}
 	
-	public void onFloat(@Nonnull String key, @Nonnull Action1<Float> f) {
+	public void onFloat(@Nonnull String key, @Nonnull Func.FloatFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getFloat(key));
 	}
 
-	public void onFloat(@Nonnull String key, @Nonnull Action1<Float> f, @Nonnull Action0 orElse) {
+	public void onFloat(@Nonnull String key, @Nonnull Func.FloatFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getFloat(key));
 		else
@@ -262,12 +259,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getDouble(key) : null;
 	}
 	
-	public void onDouble(@Nonnull String key, @Nonnull Action1<Double> f) {
+	public void onDouble(@Nonnull String key, @Nonnull Func.DoubleFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getDouble(key));
 	}
 
-	public void onDouble(@Nonnull String key, @Nonnull Action1<Double> f, @Nonnull Action0 orElse) {
+	public void onDouble(@Nonnull String key, @Nonnull Func.DoubleFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getDouble(key));
 		else
@@ -294,12 +291,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getString(key) : null;
 	}
 	
-	public void onString(@Nonnull String key, @Nonnull Action1<String> f) {
+	public void onString(@Nonnull String key, @Nonnull Func.StringFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getString(key));
 	}
 
-	public void onString(@Nonnull String key, @Nonnull Action1<String> f, @Nonnull Action0 orElse) {
+	public void onString(@Nonnull String key, @Nonnull Func.StringFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getString(key));
 		else
@@ -342,12 +339,12 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		return containsKey(key) && !isNull(key) ? getObject(key) : null;
 	}
 	
-	public void onObject(@Nonnull String key, @Nonnull Action1<JSONObject> f) {
+	public void onObject(@Nonnull String key, @Nonnull Func.ObjectFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getObject(key));
 	}
 
-	public void onObject(@Nonnull String key, @Nonnull Action1<JSONObject> f, @Nonnull Action0 orElse) {
+	public void onObject(@Nonnull String key, @Nonnull Func.ObjectFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getObject(key));
 		else
@@ -389,13 +386,15 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	public JSONList<?> getOptionalList(@Nonnull String key) {
 		return containsKey(key) && !isNull(key) ? getList(key) : null;
 	}
-	
-	public void onList(@Nonnull String key, @Nonnull Action1<JSONList<?>> f) {
+
+	@SuppressWarnings("unchecked")
+	public void onList(@Nonnull String key, @Nonnull Func.ListFunc f) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getList(key));
 	}
 
-	public void onList(@Nonnull String key, @Nonnull Action1<JSONList<?>> f, @Nonnull Action0 orElse) {
+	@SuppressWarnings("unchecked")
+	public void onList(@Nonnull String key, @Nonnull Func.ListFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (containsKey(key) && !isNull(key))
 			f.call(getList(key));
 		else

@@ -1,8 +1,5 @@
 package pl.shockah.jay;
 
-import pl.shockah.util.func.Action0;
-import pl.shockah.util.func.Action1;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
@@ -33,11 +30,11 @@ public class JSONPath {
 		return getOptionalBool(splitPath(path));
 	}
 	
-	public void onBool(@Nonnull String path, @Nonnull Action1<Boolean> f) {
+	public void onBool(@Nonnull String path, @Nonnull Func.BooleanFunc f) {
 		onBool(splitPath(path), f);
 	}
 
-	public void onBool(@Nonnull String path, @Nonnull Action1<Boolean> f, @Nonnull Action0 orElse) {
+	public void onBool(@Nonnull String path, @Nonnull Func.BooleanFunc f, @Nonnull Func.VoidFunc orElse) {
 		onBool(splitPath(path), f, orElse);
 	}
 	
@@ -62,14 +59,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalBool(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onBool(@Nonnull String[] path, @Nonnull Action1<Boolean> f) {
+	protected void onBool(@Nonnull String[] path, @Nonnull Func.BooleanFunc f) {
 		if (path.length == 1)
 			json.onBool(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onBool(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onBool(@Nonnull String[] path, @Nonnull Action1<Boolean> f, @Nonnull Action0 orElse) {
+	protected void onBool(@Nonnull String[] path, @Nonnull Func.BooleanFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onBool(path[0], f, orElse);
 		else
@@ -91,11 +88,11 @@ public class JSONPath {
 		return getOptionalBigInt(splitPath(path));
 	}
 	
-	public void onBigInt(@Nonnull String path, @Nonnull Action1<BigInteger> f) {
+	public void onBigInt(@Nonnull String path, @Nonnull Func.BigIntegerFunc f) {
 		onBigInt(splitPath(path), f);
 	}
 
-	public void onBigInt(@Nonnull String path, @Nonnull Action1<BigInteger> f, @Nonnull Action0 orElse) {
+	public void onBigInt(@Nonnull String path, @Nonnull Func.BigIntegerFunc f, @Nonnull Func.VoidFunc orElse) {
 		onBigInt(splitPath(path), f, orElse);
 	}
 
@@ -122,14 +119,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalBigInt(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onBigInt(@Nonnull String[] path, @Nonnull Action1<BigInteger> f) {
+	protected void onBigInt(@Nonnull String[] path, @Nonnull Func.BigIntegerFunc f) {
 		if (path.length == 1)
 			json.onBigInt(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onBigInt(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onBigInt(@Nonnull String[] path, @Nonnull Action1<BigInteger> f, @Nonnull Action0 orElse) {
+	protected void onBigInt(@Nonnull String[] path, @Nonnull Func.BigIntegerFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onBigInt(path[0], f, orElse);
 		else
@@ -149,11 +146,11 @@ public class JSONPath {
 		return getOptionalInt(splitPath(path));
 	}
 	
-	public void onInt(@Nonnull String path, @Nonnull Action1<Integer> f) {
+	public void onInt(@Nonnull String path, @Nonnull Func.IntFunc f) {
 		onInt(splitPath(path), f);
 	}
 
-	public void onInt(@Nonnull String path, @Nonnull Action1<Integer> f, @Nonnull Action0 orElse) {
+	public void onInt(@Nonnull String path, @Nonnull Func.IntFunc f, @Nonnull Func.VoidFunc orElse) {
 		onInt(splitPath(path), f, orElse);
 	}
 	
@@ -178,14 +175,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalInt(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onInt(@Nonnull String[] path, @Nonnull Action1<Integer> f) {
+	protected void onInt(@Nonnull String[] path, @Nonnull Func.IntFunc f) {
 		if (path.length == 1)
 			json.onInt(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onInt(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onInt(@Nonnull String[] path, @Nonnull Action1<Integer> f, @Nonnull Action0 orElse) {
+	protected void onInt(@Nonnull String[] path, @Nonnull Func.IntFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onInt(path[0], f, orElse);
 		else
@@ -205,11 +202,11 @@ public class JSONPath {
 		return getOptionalLong(splitPath(path));
 	}
 	
-	public void onLong(@Nonnull String path, @Nonnull Action1<Long> f) {
+	public void onLong(@Nonnull String path, @Nonnull Func.LongFunc f) {
 		onLong(splitPath(path), f);
 	}
 
-	public void onLong(@Nonnull String path, @Nonnull Action1<Long> f, @Nonnull Action0 orElse) {
+	public void onLong(@Nonnull String path, @Nonnull Func.LongFunc f, @Nonnull Func.VoidFunc orElse) {
 		onLong(splitPath(path), f, orElse);
 	}
 	
@@ -234,14 +231,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalLong(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onLong(@Nonnull String[] path, @Nonnull Action1<Long> f) {
+	protected void onLong(@Nonnull String[] path, @Nonnull Func.LongFunc f) {
 		if (path.length == 1)
 			json.onLong(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onLong(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onLong(@Nonnull String[] path, @Nonnull Action1<Long> f, @Nonnull Action0 orElse) {
+	protected void onLong(@Nonnull String[] path, @Nonnull Func.LongFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onLong(path[0], f, orElse);
 		else
@@ -263,11 +260,11 @@ public class JSONPath {
 		return getOptionalBigDecimal(splitPath(path));
 	}
 	
-	public void onBigDecimal(@Nonnull String path, @Nonnull Action1<BigDecimal> f) {
+	public void onBigDecimal(@Nonnull String path, @Nonnull Func.BigDecimalFunc f) {
 		onBigDecimal(splitPath(path), f);
 	}
 
-	public void onBigDecimal(@Nonnull String path, @Nonnull Action1<BigDecimal> f, @Nonnull Action0 orElse) {
+	public void onBigDecimal(@Nonnull String path, @Nonnull Func.BigDecimalFunc f, @Nonnull Func.VoidFunc orElse) {
 		onBigDecimal(splitPath(path), f, orElse);
 	}
 
@@ -294,14 +291,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalBigDecimal(Arrays.copyOfRange(path, 1, path.length));
 	}
 
-	protected void onBigDecimal(@Nonnull String[] path, @Nonnull Action1<BigDecimal> f) {
+	protected void onBigDecimal(@Nonnull String[] path, @Nonnull Func.BigDecimalFunc f) {
 		if (path.length == 1)
 			json.onBigDecimal(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onBigDecimal(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onBigDecimal(@Nonnull String[] path, @Nonnull Action1<BigDecimal> f, @Nonnull Action0 orElse) {
+	protected void onBigDecimal(@Nonnull String[] path, @Nonnull Func.BigDecimalFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onBigDecimal(path[0], f, orElse);
 		else
@@ -321,11 +318,11 @@ public class JSONPath {
 		return getOptionalFloat(splitPath(path));
 	}
 	
-	public void onFloat(@Nonnull String path, @Nonnull Action1<Float> f) {
+	public void onFloat(@Nonnull String path, @Nonnull Func.FloatFunc f) {
 		onFloat(splitPath(path), f);
 	}
 
-	public void onFloat(@Nonnull String path, @Nonnull Action1<Float> f, @Nonnull Action0 orElse) {
+	public void onFloat(@Nonnull String path, @Nonnull Func.FloatFunc f, @Nonnull Func.VoidFunc orElse) {
 		onFloat(splitPath(path), f, orElse);
 	}
 	
@@ -350,14 +347,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalFloat(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onFloat(@Nonnull String[] path, @Nonnull Action1<Float> f) {
+	protected void onFloat(@Nonnull String[] path, @Nonnull Func.FloatFunc f) {
 		if (path.length == 1)
 			json.onFloat(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onFloat(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onFloat(@Nonnull String[] path, @Nonnull Action1<Float> f, @Nonnull Action0 orElse) {
+	protected void onFloat(@Nonnull String[] path, @Nonnull Func.FloatFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onFloat(path[0], f, orElse);
 		else
@@ -377,11 +374,11 @@ public class JSONPath {
 		return getOptionalDouble(splitPath(path));
 	}
 	
-	public void onDouble(@Nonnull String path, @Nonnull Action1<Double> f) {
+	public void onDouble(@Nonnull String path, @Nonnull Func.DoubleFunc f) {
 		onDouble(splitPath(path), f);
 	}
 
-	public void onDouble(@Nonnull String path, @Nonnull Action1<Double> f, @Nonnull Action0 orElse) {
+	public void onDouble(@Nonnull String path, @Nonnull Func.DoubleFunc f, @Nonnull Func.VoidFunc orElse) {
 		onDouble(splitPath(path), f, orElse);
 	}
 	
@@ -406,14 +403,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalDouble(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onDouble(@Nonnull String[] path, @Nonnull Action1<Double> f) {
+	protected void onDouble(@Nonnull String[] path, @Nonnull Func.DoubleFunc f) {
 		if (path.length == 1)
 			json.onDouble(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onDouble(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onDouble(@Nonnull String[] path, @Nonnull Action1<Double> f, @Nonnull Action0 orElse) {
+	protected void onDouble(@Nonnull String[] path, @Nonnull Func.DoubleFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onDouble(path[0], f, orElse);
 		else
@@ -435,11 +432,11 @@ public class JSONPath {
 		return getOptionalString(splitPath(path));
 	}
 	
-	public void onString(@Nonnull String path, @Nonnull Action1<String> f) {
+	public void onString(@Nonnull String path, @Nonnull Func.StringFunc f) {
 		onString(splitPath(path), f);
 	}
 
-	public void onString(@Nonnull String path, @Nonnull Action1<String> f, @Nonnull Action0 orElse) {
+	public void onString(@Nonnull String path, @Nonnull Func.StringFunc f, @Nonnull Func.VoidFunc orElse) {
 		onString(splitPath(path), f, orElse);
 	}
 
@@ -466,14 +463,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalString(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onString(@Nonnull String[] path, @Nonnull Action1<String> f) {
+	protected void onString(@Nonnull String[] path, @Nonnull Func.StringFunc f) {
 		if (path.length == 1)
 			json.onString(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onString(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onString(@Nonnull String[] path, @Nonnull Action1<String> f, @Nonnull Action0 orElse) {
+	protected void onString(@Nonnull String[] path, @Nonnull Func.StringFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onString(path[0], f, orElse);
 		else
@@ -505,11 +502,11 @@ public class JSONPath {
 		return getOptionalObject(splitPath(path));
 	}
 	
-	public void onObject(@Nonnull String path, @Nonnull Action1<JSONObject> f) {
+	public void onObject(@Nonnull String path, @Nonnull Func.ObjectFunc f) {
 		onObject(splitPath(path), f);
 	}
 
-	public void onObject(@Nonnull String path, @Nonnull Action1<JSONObject> f, @Nonnull Action0 orElse) {
+	public void onObject(@Nonnull String path, @Nonnull Func.ObjectFunc f, @Nonnull Func.VoidFunc orElse) {
 		onObject(splitPath(path), f, orElse);
 	}
 
@@ -554,14 +551,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalObject(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onObject(@Nonnull String[] path, @Nonnull Action1<JSONObject> f) {
+	protected void onObject(@Nonnull String[] path, @Nonnull Func.ObjectFunc f) {
 		if (path.length == 1)
 			json.onObject(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onObject(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onObject(@Nonnull String[] path, @Nonnull Action1<JSONObject> f, @Nonnull Action0 orElse) {
+	protected void onObject(@Nonnull String[] path, @Nonnull Func.ObjectFunc f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onObject(path[0], f, orElse);
 		else
@@ -593,11 +590,11 @@ public class JSONPath {
 		return getOptionalList(splitPath(path));
 	}
 	
-	public void onList(@Nonnull String path, @Nonnull Action1<JSONList<?>> f) {
+	public void onList(@Nonnull String path, @Nonnull Func.ListFunc<?> f) {
 		onList(splitPath(path), f);
 	}
 
-	public void onList(@Nonnull String path, @Nonnull Action1<JSONList<?>> f, @Nonnull Action0 orElse) {
+	public void onList(@Nonnull String path, @Nonnull Func.ListFunc<?> f, @Nonnull Func.VoidFunc orElse) {
 		onList(splitPath(path), f, orElse);
 	}
 
@@ -642,14 +639,14 @@ public class JSONPath {
 		return new JSONPath(json.getObject(path[0])).getOptionalList(Arrays.copyOfRange(path, 1, path.length));
 	}
 	
-	protected void onList(@Nonnull String[] path, @Nonnull Action1<JSONList<?>> f) {
+	protected void onList(@Nonnull String[] path, @Nonnull Func.ListFunc<?> f) {
 		if (path.length == 1)
 			json.onList(path[0], f);
 		else
 			new JSONPath(json.getObject(path[0])).onList(Arrays.copyOfRange(path, 1, path.length), f);
 	}
 
-	protected void onList(@Nonnull String[] path, @Nonnull Action1<JSONList<?>> f, @Nonnull Action0 orElse) {
+	protected void onList(@Nonnull String[] path, @Nonnull Func.ListFunc<?> f, @Nonnull Func.VoidFunc orElse) {
 		if (path.length == 1)
 			json.onList(path[0], f, orElse);
 		else
