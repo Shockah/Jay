@@ -199,6 +199,8 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 		Object o = get(key);
 		if (o instanceof BigDecimal)
 			return (BigDecimal)o;
+		else if (o instanceof BigInteger)
+			return new BigDecimal((BigInteger)o);
 		throw new ClassCastException();
 	}
 
