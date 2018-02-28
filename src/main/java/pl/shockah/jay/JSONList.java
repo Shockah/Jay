@@ -117,7 +117,10 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 	
 	public int getInt(int index) {
-		return getBigInt(index).intValueExact();
+		BigInteger bi = getBigInt(index);
+		if (bi.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0)
+			throw new ArithmeticException(String.format("%s can't be converted to int", bi));
+		return bi.intValue();
 	}
 
 	@Nullable
@@ -126,7 +129,10 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 	
 	public long getLong(int index) {
-		return getBigInt(index).longValueExact();
+		BigInteger bi = getBigInt(index);
+		if (bi.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) > 0)
+			throw new ArithmeticException(String.format("%s can't be converted to long", bi));
+		return bi.longValue();
 	}
 
 	@Nullable
