@@ -140,7 +140,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	}
 	
 	public int getInt(@Nonnull String key) {
-		return getBigInt(key).intValueExact();
+		BigInteger bi = getBigInt(key);
+		if (bi.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0)
+			throw new ArithmeticException(String.format("%s can't be converted to int", bi));
+		return bi.intValue();
 	}
 	
 	public int getInt(@Nonnull String key, int def) {
@@ -165,7 +168,10 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	}
 	
 	public long getLong(@Nonnull String key) {
-		return getBigInt(key).longValueExact();
+		BigInteger bi = getBigInt(key);
+		if (bi.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) > 0)
+			throw new ArithmeticException(String.format("%s can't be converted to long", bi));
+		return bi.longValue();
 	}
 	
 	public long getLong(@Nonnull String key, long def) {
