@@ -90,6 +90,11 @@ public class JSONList<T> extends ArrayList<T> {
 	public boolean isNull(int index) {
 		return get(index) == null;
 	}
+
+	public boolean isBool(int index) {
+		Object o = super.get(index);
+		return o instanceof Boolean;
+	}
 	
 	public boolean getBool(int index) {
 		Object o = super.get(index);
@@ -101,6 +106,11 @@ public class JSONList<T> extends ArrayList<T> {
 	@Nullable
 	public Boolean getOptionalBool(int index) {
 		return isNull(index) ? null : getBool(index);
+	}
+
+	public boolean isInteger(int index) {
+		Object o = super.get(index);
+		return o instanceof BigInteger;
 	}
 
 	@Nonnull
@@ -140,6 +150,11 @@ public class JSONList<T> extends ArrayList<T> {
 		return isNull(index) ? null : getLong(index);
 	}
 
+	public boolean isDecimal(int index) {
+		Object o = super.get(index);
+		return o instanceof BigDecimal;
+	}
+
 	@Nonnull
 	public BigDecimal getBigDecimal(int index) {
 		Object o = super.get(index);
@@ -173,6 +188,11 @@ public class JSONList<T> extends ArrayList<T> {
 		return isNull(index) ? null : getDouble(index);
 	}
 
+	public boolean isString(int index) {
+		Object o = super.get(index);
+		return o instanceof String;
+	}
+
 	@Nonnull
 	public String getString(int index) {
 		Object o = super.get(index);
@@ -186,6 +206,11 @@ public class JSONList<T> extends ArrayList<T> {
 		return isNull(index) ? null : getString(index);
 	}
 
+	public boolean isObject(int index) {
+		Object o = super.get(index);
+		return o instanceof JSONObject;
+	}
+
 	@Nonnull
 	public JSONObject getObject(int index) {
 		Object o = super.get(index);
@@ -197,6 +222,11 @@ public class JSONList<T> extends ArrayList<T> {
 	@Nullable
 	public JSONObject getOptionalObject(int index) {
 		return isNull(index) ? null : getObject(index);
+	}
+
+	public boolean isList(int index) {
+		Object o = super.get(index);
+		return o instanceof JSONList<?>;
 	}
 
 	@Nonnull
@@ -328,5 +358,9 @@ public class JSONList<T> extends ArrayList<T> {
 	@Override
 	public boolean addAll(int index, @Nonnull Collection<? extends T> c) {
 		return super.addAll(index, prepareObjects(c));
+	}
+
+	public boolean isNumber(int index) {
+		return isInteger(index) || isDecimal(index);
 	}
 }
