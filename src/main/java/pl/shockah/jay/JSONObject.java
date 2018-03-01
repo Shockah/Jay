@@ -79,6 +79,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			throw new NullPointerException();
 		return get(key) == null;
 	}
+
+	public boolean isBool(@Nonnull String key) {
+		if (!containsKey(key))
+			throw new NullPointerException();
+		Object o = get(key);
+		return o instanceof Boolean;
+	}
 	
 	public boolean getBool(@Nonnull String key) {
 		if (!containsKey(key))
@@ -108,6 +115,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getBool(key));
 		else
 			orElse.call();
+	}
+
+	public boolean isInteger(@Nonnull String key) {
+		if (!containsKey(key))
+			throw new NullPointerException();
+		Object o = get(key);
+		return o instanceof BigInteger;
 	}
 
 	@Nonnull
@@ -190,6 +204,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getLong(key));
 		else
 			orElse.call();
+	}
+
+	public boolean isDecimal(@Nonnull String key) {
+		if (!containsKey(key))
+			throw new NullPointerException();
+		Object o = get(key);
+		return o instanceof BigDecimal;
 	}
 
 	@Nonnull
@@ -276,6 +297,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			orElse.call();
 	}
 
+	public boolean isString(@Nonnull String key) {
+		if (!containsKey(key))
+			throw new NullPointerException();
+		Object o = get(key);
+		return o instanceof String;
+	}
+
 	@Nonnull
 	public String getString(@Nonnull String key) {
 		if (!containsKey(key))
@@ -306,6 +334,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getString(key));
 		else
 			orElse.call();
+	}
+
+	public boolean isObject(@Nonnull String key) {
+		if (!containsKey(key))
+			throw new NullPointerException();
+		Object o = get(key);
+		return o instanceof JSONObject;
 	}
 
 	@Nonnull
@@ -354,6 +389,13 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 			f.call(getObject(key));
 		else
 			orElse.call();
+	}
+
+	public boolean isList(@Nonnull String key) {
+		if (!containsKey(key))
+			throw new NullPointerException();
+		Object o = get(key);
+		return o instanceof JSONList<?>;
 	}
 
 	@Nonnull
@@ -456,5 +498,9 @@ public class JSONObject extends LinkedHashMap<String, Object> {
 	@Override
 	public void putAll(@Nonnull Map<? extends String, ?> map) {
 		super.putAll(prepareObjects(map));
+	}
+
+	public boolean isNumber(@Nonnull String key) {
+		return isInteger(key) || isDecimal(key);
 	}
 }
