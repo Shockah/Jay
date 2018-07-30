@@ -251,10 +251,26 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 
 	@Nonnull
+	public JSONList<Boolean> ofOptionalBooleans() {
+		JSONList<Boolean> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalBool(i));
+		return j;
+	}
+
+	@Nonnull
 	public JSONList<BigInteger> ofBigInts() {
 		JSONList<BigInteger> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getBigInt(i));
+		return j;
+	}
+
+	@Nonnull
+	public JSONList<BigInteger> ofOptionalBigInts() {
+		JSONList<BigInteger> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalBigInt(i));
 		return j;
 	}
 
@@ -267,10 +283,26 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 
 	@Nonnull
+	public JSONList<Integer> ofOptionalInts() {
+		JSONList<Integer> j = new JSONList<>(Integer.class);
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalInt(i));
+		return j;
+	}
+
+	@Nonnull
 	public JSONList<Long> ofLongs() {
 		JSONList<Long> j = new JSONList<>(Long.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getLong(i));
+		return j;
+	}
+
+	@Nonnull
+	public JSONList<Long> ofOptionalLongs() {
+		JSONList<Long> j = new JSONList<>(Long.class);
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalLong(i));
 		return j;
 	}
 
@@ -283,10 +315,26 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 
 	@Nonnull
+	public JSONList<BigDecimal> ofOptionalBigDecimals() {
+		JSONList<BigDecimal> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalBigDecimal(i));
+		return j;
+	}
+
+	@Nonnull
 	public JSONList<Float> ofFloats() {
 		JSONList<Float> j = new JSONList<>(Float.class);
 		for (int i = 0; i < size(); i++)
 			j.add(getFloat(i));
+		return j;
+	}
+
+	@Nonnull
+	public JSONList<Float> ofOptionalFloats() {
+		JSONList<Float> j = new JSONList<>(Float.class);
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalFloat(i));
 		return j;
 	}
 
@@ -299,10 +347,26 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 
 	@Nonnull
+	public JSONList<Double> ofOptionalDoubles() {
+		JSONList<Double> j = new JSONList<>(Double.class);
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalDouble(i));
+		return j;
+	}
+
+	@Nonnull
 	public JSONList<String> ofStrings() {
 		JSONList<String> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getString(i));
+		return j;
+	}
+
+	@Nonnull
+	public JSONList<String> ofOptionalStrings() {
+		JSONList<String> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalString(i));
 		return j;
 	}
 
@@ -315,10 +379,26 @@ public class JSONList<T> extends ArrayList<T> {
 	}
 
 	@Nonnull
+	public JSONList<JSONObject> ofOptionalObjects() {
+		JSONList<JSONObject> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalObject(i));
+		return j;
+	}
+
+	@Nonnull
 	public JSONList<JSONList<?>> ofLists() {
 		JSONList<JSONList<?>> j = new JSONList<>();
 		for (int i = 0; i < size(); i++)
 			j.add(getList(i));
+		return j;
+	}
+
+	@Nonnull
+	public JSONList<JSONList<?>> ofOptionalLists() {
+		JSONList<JSONList<?>> j = new JSONList<>();
+		for (int i = 0; i < size(); i++)
+			j.add(getOptionalList(i));
 		return j;
 	}
 	
